@@ -1,5 +1,5 @@
 ---
-- name: gather os specific variables
+- name: Gather OS specific variables
   include_vars: "{{ item }}"
   with_first_found:
     - "{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version}}.yml"
@@ -23,7 +23,7 @@
     - nginx-base
 
 - name: Make sure the nginx-sites directory exists
-  file: path= "{{ nginx_sites_path }}" state=directory owner=root
+  file: path="{{ nginx_sites_path }}" state=directory owner=root
   tags:
     - nginx-base
 
