@@ -11,3 +11,8 @@ nginx_sites_path: /etc/nginx/sites
 
 nginx_worker_processes: false
 nginx_global_custom: false
+
+nginx_acme_challenge: true
+nginx_acme_challenge_path: /usr/share/nginx/letsencrypt
+
+nginx_ufw_path: /etc/ufw/applications.d

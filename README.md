@@ -17,6 +17,9 @@ compatible systems): https://statics.tls.security.mozilla.org/server-side-tls-co
 - ``nginx_sites_path: /etc/nginx/sites``
 - ``nginx_worker_processes: false``: Set to ``true`` to enable auto worker processes.
 - ``nginx_global_custom``: A string to be included on the uppermost config level, next to the ``http`` directive.
+- ``nginx_acme_challenge: true``: Provide an acme challenge configuration.
+- ``nginx_acme_challenge_path: /usr/share/nginx/letsencrypt``: Poing acme challenges here.
+- ``nginx_ufw_path: /etc/ufw/applications.d``: The ufw application config path
 
 
 Example Playbook
