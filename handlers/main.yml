@@ -1,2 +1,9 @@
 ---
-# handlers file for rixx.nginx-base
+- name: Restart nginx
+  service: name=nginx state=restarted
+
+- name: Reload nginx
+  service: name=nginx state=reloaded
+
+- name: Reload ufw
+  ufw: state=reloaded

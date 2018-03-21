@@ -1,2 +1,53 @@
 ---
-# tasks file for rixx.nginx-base
+- name: Ensure that nginx is installed
+  pacman: pkg=nginx state=present
+  tags:
+    - nginx-base
+
+- name: Ensure that nginx is enabled
+  service:
+    name: nginx
+    enabled: yes
+    state: started
+  tags:
+    - nginx-base
+
+- name: Make sure the nginx-sites directory exists
+  file: path="{{ nginx_sites_path }}" state=directory owner=root
+  tags:
+    - nginx-base
+
+- name: Install basic nginx config
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+  tags:
+    - nginx-base
+  notify:
+    - Reload nginx
+
+- name: Install basic nginx site config for letsencrypt/HTTPS
+  template: src=nginx-base.conf dest={{ nginx_sites_path }}/base.conf
+  tags:
+    - nginx-base
+  notify:
+    - Reload nginx
+
+- name: Create dhparams
+  command: openssl dhparam -out {{ nginx_dhparams_path }} 4096 creates={{ nginx_dhparams_path }}
+  tags:
+    - nginx-base
+  notify:
+    - Restart nginx
+
+- name: Install ufw rule for HTTP and HTTPS
+  copy: src=ufw-web dest="{{ nginx_ufw_path }}/custom-web"
+  notify:
+    - Reload ufw
+  tags:
+    - nginx-base
+    - ufw
+
+- name: Ensure ufw allows web traffic
+  ufw: rule=allow name=web
+  tags:
+    - nginx-base
+    - ufw
