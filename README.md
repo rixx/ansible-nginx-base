@@ -8,11 +8,15 @@ rule. Works with Debian, Ubuntu, and Arch Linux.
 Role Variables
 --------------
 
-``mozilla_configuration: modern|intermediate|old`` (default: ``modern``)
-
-This is one of the three possible Mozilla recommendated SSL configuration levels, as can be seen here (including
+- ``mozilla_configuration: modern|intermediate|old`` (default: ``modern``). This is one of the three possible Mozilla recommendated SSL configuration levels, as can be seen here (including
 compatible systems): https://statics.tls.security.mozilla.org/server-side-tls-conf.json
-
+- ``nginx_user: http``
+- ``nginx_dhparams_path: /etc/ssl/nginx.dhparams``
+- ``nginx_hsts: false``: Set to ``true`` to enable HSTS.
+- ``nginx_hsts_age: 15768000``: Set HSTS protection age in seconds.
+- ``nginx_sites_path: /etc/nginx/sites``
+- ``nginx_worker_processes: false``: Set to ``true`` to enable auto worker processes.
+- ``nginx_global_custom``: A string to be included on the uppermost config level, next to the ``http`` directive.
 
 
 Example Playbook

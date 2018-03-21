@@ -1,2 +1,13 @@
 ---
 mozilla_configuration: modern
+
+nginx_user: http
+nginx_dhparams_path: /etc/ssl/nginx.dhparams;
+
+nginx_hsts: false
+nginx_hsts_age: 15768000
+
+nginx_sites_path: /etc/nginx/sites
+
+nginx_worker_processes: false
+nginx_global_custom: false
