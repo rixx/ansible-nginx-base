@@ -1,4 +1,7 @@
 ---
+- name: Verify nginxconfig
+  command: nginx -t
+
 - name: Restart nginx
   service: name=nginx state=restarted
 
@@ -7,6 +10,3 @@
 
 - name: Reload ufw
   ufw: state=reloaded
-
-- name: Verify nginxconfig
-  command: nginx -t
