@@ -1,2 +1,2 @@
 ---
-# vars file for rixx.nginx-base
+mozilla: "{{ lookup('./server-side-tls-conf.json')|from_json }}"
