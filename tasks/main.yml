@@ -32,7 +32,7 @@
     - Reload nginx
 
 - name: Create dhparams
-  command: openssl dhparam -out {{ nginx_dhparams_path }} 4096 creates={{ nginx_dhparams_path }}
+  command: openssl dhparam -out {{ nginx_dhparams_path }} {{ nginx_dhparams_size }} creates={{ nginx_dhparams_path }}
   tags:
     - nginx-base
   notify:

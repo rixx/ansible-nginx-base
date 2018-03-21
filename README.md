@@ -12,6 +12,7 @@ Role Variables
 compatible systems): https://statics.tls.security.mozilla.org/server-side-tls-conf.json
 - ``nginx_user: http``
 - ``nginx_dhparams_path: /etc/ssl/nginx.dhparams``
+- ``nginx_dhparams_size: 4096``
 - ``nginx_hsts: false``: Set to ``true`` to enable HSTS.
 - ``nginx_hsts_age: 15768000``: Set HSTS protection age in seconds.
 - ``nginx_sites_path: /etc/nginx/sites``
