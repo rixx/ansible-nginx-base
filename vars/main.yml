@@ -1,2 +1,2 @@
 ---
-mozilla: "{{ lookup('./server-side-tls-conf.json')|from_json }}"
+mozilla: "{{ lookup('file', './vars/server-side-tls-conf.json') }}"
