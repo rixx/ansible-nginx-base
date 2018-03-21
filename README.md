@@ -8,7 +8,11 @@ rule. Works with Debian, Ubuntu, and Arch Linux.
 Role Variables
 --------------
 
-tbd
+``mozilla_configuration: modern|intermediate|old`` (default: ``modern``)
+
+This is one of the three possible Mozilla recommendated SSL configuration levels, as can be seen here (including
+compatible systems): https://statics.tls.security.mozilla.org/server-side-tls-conf.json
+
 
 
 Example Playbook
