@@ -10,7 +10,7 @@ Role Variables
 
 - ``mozilla_configuration: modern|intermediate|old`` (default: ``modern``). This is one of the three possible Mozilla recommendated SSL configuration levels, as can be seen here (including
 compatible systems): https://statics.tls.security.mozilla.org/server-side-tls-conf.json
-- ``nginx_user: http``
+- ``nginx_user: http`` Is OS specific in vars/$os.yml defined
 - ``nginx_dhparams_path: /etc/ssl/nginx.dhparams``
 - ``nginx_dhparams_size: 4096``
 - ``nginx_hsts: false``: Set to ``true`` to enable HSTS.
