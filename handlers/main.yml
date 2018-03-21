@@ -7,3 +7,6 @@
 
 - name: Reload ufw
   ufw: state=reloaded
+
+- name: Verify nginxconfig
+  command: nginx -t
