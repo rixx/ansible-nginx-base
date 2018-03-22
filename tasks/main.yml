@@ -45,6 +45,7 @@
   template:
      src: nginx-base.conf
      dest: "{{ nginx_sites_path }}/base.conf"
+  when: nginx_base_conf == true
   tags:
     - nginx-base
   notify:
