@@ -9,7 +9,7 @@
     - vars
 
 - name: include install tasks
-  include_tasks: install_{{ ansible_os_family|lower }}.yml
+  include_tasks: install_{{ ansible_distribution|lower }}.yml
   tags:
     - nginx-base
     - vars
@@ -34,6 +34,7 @@
   template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
+  when: nginx_base_conf
   tags:
     - nginx-base
   notify:
@@ -43,7 +44,8 @@
 - name: Install basic nginx site config for letsencrypt/HTTPS
   template:
      src: nginx-base.conf
-     dest: {{ nginx_sites_path }}/base.conf
+     dest: "{{ nginx_sites_path }}/base.conf"
+  when: nginx_base_conf == true
   tags:
     - nginx-base
   notify:
@@ -51,8 +53,9 @@
     - Verify nginxconfig
 
 - name: Create dhparams
-  command: openssl dhparam -out {{ nginx_dhparams_path }} {{ nginx_dhparams_size }}
-    creates: {{ nginx_dhparams_path }}
+  command: "openssl dhparam -out {{ nginx_dhparams_path }} {{ nginx_dhparams_size }}"
+  args:
+    creates: "{{ nginx_dhparams_path }}"
   tags:
     - nginx-base
   notify:
