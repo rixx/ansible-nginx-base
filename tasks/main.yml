@@ -34,6 +34,7 @@
   template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
+  when: nginx_base_conf
   tags:
     - nginx-base
   notify:

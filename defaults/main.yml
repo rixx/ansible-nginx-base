@@ -17,3 +17,5 @@ nginx_acme_challenge: true
 nginx_acme_challenge_path: /usr/share/nginx/letsencrypt
 
 nginx_ufw_path: /etc/ufw/applications.d
+
+nginx_base_conf: true
