@@ -18,7 +18,6 @@
   service:
     name: nginx
     enabled: yes
-    state: started
   tags:
     - nginx-base
 
