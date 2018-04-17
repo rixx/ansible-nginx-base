@@ -20,6 +20,7 @@ compatible systems): https://statics.tls.security.mozilla.org/server-side-tls-co
 - ``nginx_global_custom``: A string to be included on the uppermost config level, next to the ``http`` directive.
 - ``nginx_acme_challenge: true``: Provide an acme challenge configuration, when nginx_base_conf in deployed.
 - ``nginx_acme_challenge_path: /usr/share/nginx/letsencrypt``: Poing acme challenges here.
+- ``nginx_acme_redirect: true``: Redirect to another server on incoming acme challenges. Mutually exclusive with ``nginx_acme_challenge``
 - ``nginx_ufw_path: /etc/ufw/applications.d``: The ufw application config path
 - ``nginx_base_conf: true``: apply template/nginx-base.conf with redirect to https etc..
 
