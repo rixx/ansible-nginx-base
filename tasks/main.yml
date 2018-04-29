@@ -14,7 +14,7 @@
     - nginx-base
     - vars
 
-- name: Ensure that nginx is enabled
+- name: Ensure that nginx is enabled and started
   service:
     name: nginx
     enabled: yes
