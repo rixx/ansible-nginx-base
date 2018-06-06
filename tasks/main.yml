@@ -14,13 +14,6 @@
     - nginx-base
     - vars
 
-- name: Ensure that nginx is enabled and started
-  service:
-    name: nginx
-    enabled: yes
-  tags:
-    - nginx-base
-
 - name: Make sure the nginx-sites directory exists
   file:
     path: "{{ nginx_sites_path }}"
@@ -77,3 +70,11 @@
   tags:
     - nginx-base
     - ufw
+
+- name: Ensure that nginx is enabled and started
+  service:
+    name: nginx
+    enabled: yes
+    state: started
+  tags:
+    - nginx-base
