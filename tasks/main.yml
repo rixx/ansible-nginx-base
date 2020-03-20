@@ -78,3 +78,9 @@
     state: started
   tags:
     - nginx-base
+
+- name: run handlers at this Point
+  meta: flush_handlers
+  tags:
+    - common
+    - network
