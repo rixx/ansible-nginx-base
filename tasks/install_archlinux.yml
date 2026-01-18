@@ -5,7 +5,7 @@
     state: present
   vars:
     packages:
-    - nginx
-    - ufw
+      - nginx
+      - ufw
   tags:
     - nginx-base

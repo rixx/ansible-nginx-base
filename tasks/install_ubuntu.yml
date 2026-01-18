@@ -4,7 +4,7 @@
     name: "{{ packages }}"
     state: present
   vars:
-    packages:      
-    - nginx
+    packages:
+      - nginx
   tags:
     - apt
