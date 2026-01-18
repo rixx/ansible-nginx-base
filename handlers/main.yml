@@ -1,12 +1,18 @@
 ---
 - name: Verify nginxconfig
-  command: nginx -t
+  ansible.builtin.command: nginx -t
+  changed_when: false
 
 - name: Restart nginx
-  service: name=nginx state=restarted
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
 
 - name: Reload nginx
-  service: name=nginx state=reloaded
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded
 
 - name: Reload ufw
-  ufw: state=reloaded
+  community.general.ufw:
+    state: reloaded

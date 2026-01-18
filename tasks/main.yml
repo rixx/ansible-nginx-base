@@ -1,31 +1,33 @@
 ---
 - name: Gather OS specific variables
-  include_vars: "{{ item }}"
+  ansible.builtin.include_vars: "{{ item }}"
   with_first_found:
-    - "{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version}}.yml"
-    - "{{ ansible_distribution|lower }}.yml"
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
   tags:
     - nginx-base
     - vars
 
-- name: include install tasks
-  include_tasks: install_{{ ansible_distribution|lower }}.yml
+- name: Include install tasks
+  ansible.builtin.include_tasks: install_{{ ansible_distribution | lower }}.yml
   tags:
     - nginx-base
     - vars
 
 - name: Make sure the nginx-sites directory exists
-  file:
+  ansible.builtin.file:
     path: "{{ nginx_sites_path }}"
     state: directory
     owner: root
+    mode: "0755"
   tags:
     - nginx-base
 
 - name: Install basic nginx config
-  template:
+  ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
+    mode: "0644"
   when: nginx_base_conf
   tags:
     - nginx-base
@@ -34,10 +36,11 @@
     - Verify nginxconfig
 
 - name: Install basic nginx site config for letsencrypt/HTTPS
-  template:
-     src: nginx-base.conf
-     dest: "{{ nginx_sites_path }}/base.conf"
-  when: nginx_base_conf == true
+  ansible.builtin.template:
+    src: nginx-base.conf
+    dest: "{{ nginx_sites_path }}/base.conf"
+    mode: "0644"
+  when: nginx_base_conf
   tags:
     - nginx-base
   notify:
@@ -45,7 +48,7 @@
     - Verify nginxconfig
 
 - name: Create dhparams
-  command: "openssl dhparam -out {{ nginx_dhparams_path }} {{ nginx_dhparams_size }}"
+  ansible.builtin.command: "openssl dhparam -out {{ nginx_dhparams_path }} {{ nginx_dhparams_size }}"
   args:
     creates: "{{ nginx_dhparams_path }}"
   tags:
@@ -54,9 +57,10 @@
     - Restart nginx
 
 - name: Install ufw rule for HTTP and HTTPS
-  copy:
+  ansible.builtin.copy:
     src: ufw-web
     dest: "{{ nginx_ufw_path }}/custom-web"
+    mode: "0644"
   notify:
     - Reload ufw
   tags:
@@ -64,7 +68,7 @@
     - ufw
 
 - name: Ensure ufw allows web traffic
-  ufw: 
+  community.general.ufw:
     rule: allow
     name: web
   tags:
@@ -72,15 +76,15 @@
     - ufw
 
 - name: Ensure that nginx is enabled and started
-  service:
+  ansible.builtin.service:
     name: nginx
-    enabled: yes
+    enabled: true
     state: started
   tags:
     - nginx-base
 
-- name: run handlers at this Point
-  meta: flush_handlers
+- name: Run handlers at this Point
+  ansible.builtin.meta: flush_handlers
   tags:
     - common
     - network

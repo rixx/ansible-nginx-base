@@ -1,6 +1,6 @@
 ---
 - name: Ensure that nginx is installed
-  apt:
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
   vars:

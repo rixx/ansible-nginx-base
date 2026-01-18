@@ -1,6 +1,6 @@
 ---
 - name: Ensure that nginx is installed
-  pacman:
+  community.general.pacman:
     pkg: "{{ packages }}"
     state: present
   vars:
